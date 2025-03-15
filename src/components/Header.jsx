@@ -16,12 +16,14 @@ const Header = () => {
             schedule your appointment hassle-free.
           </p>
         </div>
-        <a
-          href=""
-          className="flex items-start gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm m-auto hover:scale-105 transition-all duration-300"
-        >
-          Book Appointment <img src={assets.arrow_icon} className="w-3" />
-        </a>
+        <div className="flex">
+          <a
+            href=""
+            className="flex items-center gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm m-auto hover:scale-105 transition-all duration-300"
+          >
+            Book Appointment <img src={assets.arrow_icon} className="w-3" />
+          </a>
+        </div>
       </div>
       <div className="md:w-1/2 relative">
         <img
