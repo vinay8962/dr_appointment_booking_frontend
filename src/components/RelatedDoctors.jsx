@@ -22,10 +22,13 @@ const RelatedDoctors = ({ speciality, docId }) => {
         Simply browse through our extensive list of trusted doctors.
       </p>
       <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 pt-5 gap-y-6 px-3 sm:px-0">
-        {relDocs.slice(0, 10).map((doctor, index) => (
+        {relDocs.slice(0, 5).map((doctor, index) => (
           <div
             key={index}
-            onClick={() => navigate(`/appointment/${doctor._id}`)}
+            onClick={() => {
+              navigate(`/appointment/${doctor._id}`);
+              scrollTo(0, 0);
+            }}
             className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
           >
             <img src={doctor.image} alt="" className="bg-blue-50" />
