@@ -53,10 +53,24 @@ const Appointment = () => {
           hour12: true, // Ensures AM/PM format
         });
 
-        timeSlots.push({
-          datetime: new Date(currentDate),
-          time: formattedTime,
-        });
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1; // Months are zero-based
+        let year = currentDate.getFullYear();
+        const slotDate = day + "_" + month + "_" + year;
+        const slotTime = formattedTime;
+
+        const isSlotAvailable =
+          docInfo.slots_booked[slotDate] &&
+          docInfo.slots_booked[slotDate].includes(slotTime)
+            ? false
+            : true;
+
+        if (isSlotAvailable) {
+          timeSlots.push({
+            datetime: new Date(currentDate),
+            time: formattedTime,
+          });
+        }
 
         currentDate.setMinutes(currentDate.getMinutes() + 30); // Increment by 30 min
       }
@@ -77,6 +91,7 @@ const Appointment = () => {
       let year = date.getFullYear();
 
       const slotDate = day + "_" + month + "_" + year;
+
       const { data } = await axios.post(
         backendUrl + "/api/user/book-appointment",
         { docId, slotDate, slotTime },
@@ -86,7 +101,7 @@ const Appointment = () => {
       if (data.success) {
         toast.success(data.message);
         getDoctorsData();
-        navigate("/my-appointments");
+        navigate("/my-appointment");
       } else {
         toast.error(data.message);
       }
